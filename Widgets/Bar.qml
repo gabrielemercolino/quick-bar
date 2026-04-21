@@ -42,6 +42,8 @@ Variants {
                     centerIn: parent
                 }
                 spacing: 8
+
+                WindowTitleWidget {}
             }
 
             RowLayout {
