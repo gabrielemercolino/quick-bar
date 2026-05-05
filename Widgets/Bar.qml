@@ -35,6 +35,8 @@ Variants {
                     verticalCenter: parent.verticalCenter
                 }
                 spacing: 8
+
+                WorkspacesWidget {}
             }
 
             RowLayout {
