@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import qs
 
 RowLayout {
@@ -11,6 +10,8 @@ RowLayout {
 
     signal monthChangeRequested(int month)
     signal yearChangeRequested(int year)
+
+    property var style: Settings.styles.time.calendar.header
 
     TextMetrics {
         id: monthMetrics
@@ -27,10 +28,8 @@ RowLayout {
     }
 
     // Month controls
-    Button {
-        text: "<"
-        flat: true
-        implicitWidth: contentItem.implicitWidth + 8
+    HeaderButton {
+        text: ""
         onClicked: {
             if (root.month === 0) {
                 root.monthChangeRequested(11);
@@ -44,14 +43,13 @@ RowLayout {
     Text {
         id: monthText
         text: Settings.locale.toString(new Date(root.year, root.month), "MMMM")
+        color: root.style.foreground
         horizontalAlignment: Text.AlignHCenter
         Layout.preferredWidth: monthMetrics.boundingRect.width
     }
 
-    Button {
-        text: ">"
-        flat: true
-        implicitWidth: contentItem.implicitWidth + 8
+    HeaderButton {
+        text: ""
         onClicked: {
             if (root.month === 11) {
                 root.monthChangeRequested(0);
@@ -63,23 +61,20 @@ RowLayout {
     }
 
     // Year controls
-    Button {
-        text: "<"
-        flat: true
-        implicitWidth: contentItem.implicitWidth + 8
+    HeaderButton {
+        text: ""
         onClicked: root.yearChangeRequested(root.year - 1)
     }
 
     Text {
         text: Settings.locale.toString(new Date(root.year, root.month), "yyyy")
+        color: root.style.foreground
         horizontalAlignment: Text.AlignHCenter
         Layout.fillWidth: true
     }
 
-    Button {
-        text: ">"
-        flat: true
-        implicitWidth: contentItem.implicitWidth + 8
+    HeaderButton {
+        text: ""
         onClicked: root.yearChangeRequested(root.year + 1)
     }
 }

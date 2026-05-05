@@ -14,14 +14,37 @@ MonthGrid {
     year: TimeService.now.getFullYear()
     locale: Settings.locale
 
-    delegate: Text {
+    delegate: Item {
         required property var model
         required property int month
 
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        text: model.day
-        opacity: month === root.month ? 1 : 0.3
-        font.bold: model.today
+        property var style: Settings.styles.time.calendar.day
+
+        implicitWidth: textLabel.implicitWidth
+        implicitHeight: textLabel.implicitHeight + 8
+
+        HoverHandler {
+            id: hoverHandler
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            radius: 8
+            color: parent.model.today ? parent.style.background.current : parent.style.background.normal
+            border {
+                color: (hoverHandler.hovered && parent.month === root.month) ? parent.style.background.current : "transparent"
+                width: 2
+            }
+        }
+
+        Text {
+            id: textLabel
+
+            anchors.centerIn: parent
+            text: parent.model.day
+            color: parent.model.today ? parent.style.foreground.current : parent.style.foreground.normal
+            opacity: parent.month === root.month ? 1 : 0.3
+            font.bold: parent.model.today
+        }
     }
 }

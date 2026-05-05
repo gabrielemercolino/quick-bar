@@ -6,41 +6,59 @@ import qs.Services
 import qs.Popups.Calendar
 
 Item {
-    implicitWidth: dateArea.implicitWidth
-    implicitHeight: dateArea.implicitHeight
+    id: root
+
+    property var style: Settings.styles.time
+
+    implicitWidth: timeArea.implicitWidth
+    implicitHeight: timeArea.implicitHeight
 
     Rectangle {
         anchors.fill: parent
-        color: "white"
-        radius: 10
+        color: root.style.background
+        radius: 16
     }
 
     MouseArea {
-        id: dateArea
+        id: timeArea
+
         anchors.centerIn: parent
-        implicitWidth: dateRow.implicitWidth + 20
-        implicitHeight: dateRow.implicitHeight + 18
+        implicitWidth: timeRow.implicitWidth + 26
+        implicitHeight: timeRow.implicitHeight + 14
+
         cursorShape: Qt.PointingHandCursor
         onClicked: {
             calPopup.visible = !calPopup.visible;
             focusGrab.active = calPopup.visible;
         }
 
+        HoverHandler {
+            id: hoverHandler
+        }
+
         RowLayout {
-            id: dateRow
+            id: timeRow
+
+            property var dateFg: hoverHandler.hovered ? root.style.date.foreground.hover : root.style.date.foreground.normal
+            property var clockFg: hoverHandler.hovered ? root.style.clock.foreground.hover : root.style.clock.foreground.normal
+
             anchors.centerIn: parent
             spacing: 6
 
             Text {
+                color: parent.dateFg
                 text: "󰸘"
             }
             Text {
+                color: parent.dateFg
                 text: Settings.locale.toString(TimeService.now, "ddd d MMM")
             }
             Text {
+                color: parent.clockFg
                 text: ""
             }
             Text {
+                color: parent.clockFg
                 text: Settings.locale.toString(TimeService.now, "hh:mm")
                 font.bold: true
             }
@@ -49,7 +67,7 @@ Item {
 
     CalendarPopup {
         id: calPopup
-        anchorItem: dateArea
+        anchorItem: timeArea
     }
 
     HyprlandFocusGrab {

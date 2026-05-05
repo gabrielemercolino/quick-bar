@@ -55,7 +55,8 @@ Variants {
                     verticalCenter: parent.verticalCenter
                 }
                 spacing: 8
-                ClockWidget {}
+
+                TimeWidget {}
             }
         }
     }

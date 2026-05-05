@@ -1,15 +1,16 @@
 import QtQuick
 import QtQuick.Layouts
+import qs
 import qs.Services.Workspaces
 
 Item {
-    implicitWidth: row.implicitWidth + 8
-    implicitHeight: row.implicitHeight + 6
+    implicitWidth: row.implicitWidth + 10
+    implicitHeight: row.implicitHeight + 10
 
     Rectangle {
         anchors.fill: parent
-        color: "white"
-        radius: 10
+        color: Settings.styles.workspaces.background
+        radius: 16
     }
 
     RowLayout {
@@ -21,11 +22,15 @@ Item {
             model: WorkspacesService.workspaceIds
 
             delegate: Item {
+                id: button
+
                 required property int modelData
                 readonly property bool active: WorkspacesService.focusedId === modelData
 
-                implicitWidth: textLabel.implicitWidth + 28
-                implicitHeight: textLabel.implicitHeight + 16
+                property var style: Settings.styles.workspaces.button
+
+                implicitWidth: textLabel.implicitWidth + 22
+                implicitHeight: textLabel.implicitHeight + 10
 
                 HoverHandler {
                     id: hoverHandler
@@ -34,10 +39,11 @@ Item {
                 Rectangle {
                     anchors.fill: parent
                     radius: 10
-                    color: (parent.active || hoverHandler.hovered) ? "#333" : "transparent"
+                    color: (parent.active || hoverHandler.hovered) ? button.style.background.active : button.style.background.inactive
+
                     Behavior on color {
                         ColorAnimation {
-                            duration: 150
+                            duration: 100
                         }
                     }
                 }
@@ -46,7 +52,7 @@ Item {
                     id: textLabel
                     anchors.centerIn: parent
                     text: parent.modelData
-                    color: (parent.active || hoverHandler.hovered) ? "white" : "#666"
+                    color: (parent.active || hoverHandler.hovered) ? button.style.foreground.active : button.style.foreground.inactive
                     font.pixelSize: 14
                     font.weight: Font.DemiBold
                 }

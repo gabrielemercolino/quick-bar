@@ -17,6 +17,14 @@ PopupWindow {
     implicitWidth: 280
     implicitHeight: calLayout.implicitHeight + 16
 
+    color: "transparent"
+
+    Rectangle {
+        anchors.fill: parent
+        color: Settings.styles.time.calendar.background
+        radius: 16
+    }
+
     ColumnLayout {
         id: calLayout
         anchors {
@@ -33,8 +41,11 @@ PopupWindow {
         }
 
         DayOfWeekRow {
+            id: dayOfWeek
+
             Layout.fillWidth: true
             locale: Settings.locale
+            palette.text: Settings.styles.time.calendar.header.foreground
         }
 
         MonthView {
