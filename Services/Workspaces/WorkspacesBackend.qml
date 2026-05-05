@@ -1,7 +1,7 @@
 import QtQuick
 
-Item {
-    property var workspaceIds: []
-    property int focusedId: -1
+QtObject {
+    required property var workspaceIds
+    required property int focusedId
     function switchTo(id) {}
 }

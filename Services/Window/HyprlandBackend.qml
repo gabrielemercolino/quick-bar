@@ -13,19 +13,18 @@ WindowBackend {
     property string _title: ""
     title: _title
 
-    Component.onCompleted: Hyprland.refreshToplevels()
+    Component.onCompleted: {
+        Hyprland.rawEvent.connect(onRawEvent);
+        Hyprland.refreshToplevels();
+    }
 
-    Connections {
-        target: Hyprland
+    function onRawEvent(event) {
+        const relevant = ["openlayer", "closelayer", "openwindow", "closewindow", "windowtitle", "windowtitlev2", "urgent", "activewindow", "activewindowv2", "workspace"];
 
-        function onRawEvent(event) {
-            const relevant = ["openlayer", "closelayer", "openwindow", "closewindow", "windowtitle", "windowtitlev2", "urgent", "activewindow", "activewindowv2", "workspace"];
-
-            if (relevant.includes(event.name)) {
-                Hyprland.refreshToplevels();
-                const initialTitle = root.toplevel?.lastIpcObject?.initialTitle;
-                root._title = initialTitle ?? "";
-            }
+        if (relevant.includes(event.name)) {
+            Hyprland.refreshToplevels();
+            const initialTitle = root.toplevel?.lastIpcObject?.initialTitle;
+            root._title = initialTitle ?? "";
         }
     }
 }

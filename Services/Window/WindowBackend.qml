@@ -1,7 +1,7 @@
 import QtQuick
 
-Item {
-    property string title: ""
-    property string appId: ""
-    property bool hasWindow: false
+QtObject {
+    required property string title
+    required property string appId
+    required property bool hasWindow
 }
