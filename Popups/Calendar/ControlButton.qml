@@ -11,6 +11,7 @@ Button {
 
     flat: true
     implicitWidth: contentItem.implicitWidth + 8
+    background.opacity: 0
 
     contentItem: Text {
         anchors.centerIn: control
@@ -21,6 +22,4 @@ Button {
             id: hoverHandler
         }
     }
-
-    background.opacity: 0
 }

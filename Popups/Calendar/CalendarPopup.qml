@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import qs
+import qs.Services
 
 PopupWindow {
     id: calPopup
@@ -14,7 +15,7 @@ PopupWindow {
     anchor.rect.x: (anchorItem.width - implicitWidth) / 2
     anchor.rect.y: anchorItem.height
 
-    implicitWidth: 280
+    implicitWidth: 300
     implicitHeight: calLayout.implicitHeight + 16
 
     color: "transparent"
@@ -33,11 +34,32 @@ PopupWindow {
         }
         spacing: 4
 
-        CalendarHeader {
-            month: grid.month
-            year: grid.year
-            onMonthChangeRequested: month => grid.month = month
-            onYearChangeRequested: year => grid.year = year
+        Rectangle {
+            radius: 8
+            color: Settings.styles.time.calendar.header.background
+            Layout.fillWidth: true
+            implicitHeight: controls.implicitHeight + 10
+
+            CalendarControls {
+                id: controls
+
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: 8
+                    rightMargin: 8
+                }
+
+                month: grid.month
+                year: grid.year
+                onMonthChangeRequested: month => grid.month = month
+                onYearChangeRequested: year => grid.year = year
+                onResetRequested: {
+                    grid.year = TimeService.now.getFullYear();
+                    grid.month = TimeService.now.getMonth();
+                }
+            }
         }
 
         DayOfWeekRow {
@@ -45,7 +67,7 @@ PopupWindow {
 
             Layout.fillWidth: true
             locale: Settings.locale
-            palette.text: Settings.styles.time.calendar.header.foreground
+            palette.text: Settings.styles.time.calendar.week.foreground
         }
 
         MonthView {

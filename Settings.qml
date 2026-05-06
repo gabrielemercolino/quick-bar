@@ -65,13 +65,17 @@ Singleton {
             property var calendar: QtObject {
                 property var background: root.widgetConfig("time", "calendar.background") ?? root.base01
                 property var header: QtObject {
-                    property var foreground: root.widgetConfig("time", "calendar.header.foreground.normal") ?? root.base0E
+                    property var foreground: root.widgetConfig("time", "calendar.header.foreground") ?? root.base0E
+                    property var background: root.widgetConfig("time", "calendar.header.background") ?? root.base00
                     property var button: QtObject {
                         property var foreground: QtObject {
                             property var normal: root.widgetConfig("time", "calendar.header.foreground.normal") ?? root.base0E
                             property var hover: root.widgetConfig("time", "calendar.header.foreground.hover") ?? root.base08
                         }
                     }
+                }
+                property var week: QtObject {
+                    property var foreground: root.widgetConfig("time", "calendar.header.foreground") ?? root.base05
                 }
                 property var day: QtObject {
                     property var background: QtObject {
