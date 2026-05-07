@@ -16,6 +16,8 @@
             echo "qs -p $(pwd) for local testing"
             echo
           '';
+
+        QSG_RHI_BACKEND = "vulkan"; # vulkan renderer by default
       };
     };
 
