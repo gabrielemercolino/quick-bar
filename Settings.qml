@@ -10,22 +10,22 @@ Singleton {
 
     property var locale: Qt.locale(config?.locale ?? "it_IT")
 
-    property string base00: palette("base00") ?? "#1a141f"
-    property string base01: palette("base01") ?? "#2a1e3b"
-    property string base02: palette("base02") ?? "#3d2a52"
-    property string base03: palette("base03") ?? "#544167"
-    property string base04: palette("base04") ?? "#75658b"
-    property string base05: palette("base05") ?? "#cfc0d9"
-    property string base06: palette("base06") ?? "#e5dced"
-    property string base07: palette("base07") ?? "#f4f0f7"
-    property string base08: palette("base08") ?? "#ea6d9c"
-    property string base09: palette("base09") ?? "#e89368"
-    property string base0A: palette("base0A") ?? "#d4ac76"
-    property string base0B: palette("base0B") ?? "#7abf9e"
-    property string base0C: palette("base0C") ?? "#70b8d4"
-    property string base0D: palette("base0D") ?? "#7b93db"
-    property string base0E: palette("base0E") ?? "#b88cce"
-    property string base0F: palette("base0F") ?? "#e87d9a"
+    property string base00: palette("base00") ?? "#1a1b26"
+    property string base01: palette("base01") ?? "#16161e"
+    property string base02: palette("base02") ?? "#2f3549"
+    property string base03: palette("base03") ?? "#444b6a"
+    property string base04: palette("base04") ?? "#787c99"
+    property string base05: palette("base05") ?? "#a9b1d6"
+    property string base06: palette("base06") ?? "#cbccd1"
+    property string base07: palette("base07") ?? "#d5d6db"
+    property string base08: palette("base08") ?? "#f7768e"
+    property string base09: palette("base09") ?? "#ff9e64"
+    property string base0A: palette("base0A") ?? "#e0af68"
+    property string base0B: palette("base0B") ?? "#9ece6a"
+    property string base0C: palette("base0C") ?? "#73daca"
+    property string base0D: palette("base0D") ?? "#7aa2f7"
+    property string base0E: palette("base0E") ?? "#bb9af7"
+    property string base0F: palette("base0F") ?? "#ff007c"
 
     property var styles: QtObject {
         property var windowTitle: QtObject {
